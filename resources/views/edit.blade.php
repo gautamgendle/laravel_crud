@@ -157,7 +157,7 @@
 
             <div class="form-group">
                 <label for="address">Enter File <span class="text-danger">*</span></label>
-                <input type="file" name="image" id="image" class="form-control" value="{{ asset('uploads/' . $customer->image) }}"
+                <input type="file" name="image" id="image" class="form-control" value="{{ $customer->image }}"
                     aria-describedby="helpId">
                 <span class="text-danger">
                     @error('image')

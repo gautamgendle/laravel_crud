@@ -25,7 +25,7 @@ class CustomerController extends Controller
                 'country' => 'required',
                 'state' => 'required',
                 'dob' => 'required',
-                'image' => 'required|mimes:png,jpg,jpeg'
+                'image' => 'required|mimes:png,jpg,jpeg,gif|min:1|max:1024'
 
             ]
         );
@@ -93,5 +93,12 @@ class CustomerController extends Controller
         $customer->dob = $request['dob'];
         $customer->save();
         return redirect('/customer/view');
+    }
+
+    public function confm_delete($id)
+    {
+        $customer = Customer::findOrFail($id);
+        $customer->delete();
+        return response()->json(['status' =>'Yourfile has been deleted!']);
     }
 }
