@@ -36,8 +36,9 @@
     <div class="container">
         <h1 class="text-center text-primary"><strong>Update Customer</strong></h1>
         &nbsp;
-        <form action="{{ route('customer.update', ['id' => $customer->customer_id]) }}" method="post">
+        <form action="{{ route('customer.update', ['id' => $customer->customer_id]) }}" method="post" enctype="multipart/form-data">
             @csrf
+           
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Name <span class="text-danger">*</span></label>
@@ -157,8 +158,10 @@
 
             <div class="form-group">
                 <label for="address">Enter File <span class="text-danger">*</span></label>
-                <input type="file" name="image" id="image" class="form-control" value="{{ $customer->image }}"
+                <input type="file" name="image" id="image" class="form-control" value="{{$customer->image}}"
                     aria-describedby="helpId">
+                    <img src="{{ asset('uploads/' . $customer->image) }}" height="50"
+                                    width="50" />
                 <span class="text-danger">
                     @error('image')
                         {{ $message }}

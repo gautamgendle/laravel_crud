@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use Illuminate\Support\Facades\File;
+
 
 class CustomerController extends Controller
 {
@@ -14,7 +16,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-      
+
         $request->validate(
             [
                 'name' => 'required',
@@ -29,7 +31,7 @@ class CustomerController extends Controller
 
             ]
         );
-       
+
 
         $customer = new Customer;
         $customer->name = $request['name'];
@@ -42,8 +44,8 @@ class CustomerController extends Controller
         $customer->password = md5($request['password']);
 
         $file = $request->file('image');
-        $filename = time().'-'.$file->getClientOriginalName();
-        $destination = public_path().'/uploads';
+        $filename = time() . '-' . $file->getClientOriginalName();
+        $destination = public_path() . '/uploads';
         $file->move($destination, $filename);
         $customer->image = $filename;
         $customer->save();
@@ -91,6 +93,14 @@ class CustomerController extends Controller
         $customer->state = $request['state'];
         $customer->country = $request['country'];
         $customer->dob = $request['dob'];
+        $customer->password = md5($request['password']);
+
+        $file = $request->file('image');
+        $filename = time() . '-' . $file->getClientOriginalName();
+        $destination = public_path() . '/uploads';
+        $file->move($destination, $filename);
+        $customer->image = $filename;
+
         $customer->save();
         return redirect('/customer/view');
     }
@@ -99,6 +109,6 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $customer->delete();
-        return response()->json(['status' =>'Yourfile has been deleted!']);
+        return response()->json(['status' => 'Yourfile has been deleted!']);
     }
 }

@@ -49,3 +49,4 @@ Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('cu
 Route::post('/customer/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
 
 
+
